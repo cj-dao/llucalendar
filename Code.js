@@ -13,6 +13,9 @@ const CONFIG = {
 
   //Life subgroup (A or B)
   SUBGROUP: 'A'.toLowerCase(),
+
+  //How many days in the future to modify events
+  FORECAST: 14,
   
   //------Don't change the following values
   
@@ -41,7 +44,7 @@ const CONFIG = {
 function syncCalendars() {
   // 1. Define the time windows
   const now = new Date();
-  const sevenDaysFromNow = new Date(now.getTime() + (14 * 24 * 60 * 60 * 1000));
+  const sevenDaysFromNow = new Date(now.getTime() + (CONFIG.FORECAST * 24 * 60 * 60 * 1000));
   const updatedMin = new Date(now.getTime() - (CONFIG.SYNC_WINDOW_HOURS * 60 * 60 * 1000)).toISOString();
 
   const combinedEventsMap = new Map();
