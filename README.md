@@ -14,4 +14,5 @@ The script may errantly miss events or otherwise fail to properly reflect your s
 7) Run the script from the code panel to test, ensuring that the syncCalendars function is selected to execute.
 
 # Optional instructions
+-Change the number of future days the script will modify
 -Modify the getColor() function to customize color-coding.
