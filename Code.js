@@ -3,21 +3,16 @@
  */
 const CONFIG = {
   // ID of the calendar to copy events FROM.
-  SOURCE_CALENDAR_ID: 'insert-llu-canvas-calendar-id',
+  SOURCE_CALENDAR_ID: '1cmf40v4v4ctchb0u99a3382r2v17k7v@import.calendar.google.com',
 
   // ID of the calendar to copy events TO. Find this in the calendar's settings.
-  DESTINATION_CALENDAR_ID: 'insert-your-destination-calendar-id',
+  DESTINATION_CALENDAR_ID: 'calebjonathandao@gmail.com',
 
-  //Life group #: Insert yours here!!
+  //Life group #
   GROUP_NUM: 00,
 
   //Life subgroup (A or B)
   SUBGROUP: 'A'.toLowerCase(),
-
-  //How many days in the future to modify events
-  FORECAST: 14,
-  
-  //------Don't change the following values
   
   // Keywords denoting Group events
   KEYWORDS: ['Group'],
@@ -44,7 +39,7 @@ const CONFIG = {
 function syncCalendars() {
   // 1. Define the time windows
   const now = new Date();
-  const sevenDaysFromNow = new Date(now.getTime() + (CONFIG.FORECAST * 24 * 60 * 60 * 1000));
+  const sevenDaysFromNow = new Date(now.getTime() + (14 * 24 * 60 * 60 * 1000));
   const updatedMin = new Date(now.getTime() - (CONFIG.SYNC_WINDOW_HOURS * 60 * 60 * 1000)).toISOString();
 
   const combinedEventsMap = new Map();
@@ -300,6 +295,51 @@ function updateCopiedEvent(sourceEvent, copiedEvent, colorId) {
 }
 
 function containsLifeGroup(title) {
+  // 1. Use a regular expression with the global flag 'g' to find ALL instances of 'Groups...'.
+  // The 'i' flag makes the search case-insensitive.
+  const matches = title.matchAll(/Groups\s+([^:;\[\](){}]+)/gi);
+
+  if(title.toLowerCase().indexOf('Group '+CONFIG.GROUP_NUM) != -1) {
+    return true;
+  }
+
+  // 2. Iterate over each match found in the title. Each 'match' is a separate group list.
+  for (const match of matches) {
+    // 3. If a match is found and has a captured group...
+    if (match && match[1]) {
+      // 4. The captured group list is in match[1]. Split it by commas.
+      const groups = match[1].split(',');
+
+      // 5. Iterate over each potential group string in the current list.
+      for (const group of groups) {
+        // Trim whitespace from the beginning and end of the string.
+        const trimmedGroup = group.trim();
+
+        // 6. Check if the group is a range (e.g., "16-20").
+        if (trimmedGroup.includes('-')) {
+          // Split the range into start and end parts, and convert them to integers.
+          const [start, end] = trimmedGroup.split('-').map(num => parseInt(num, 10));
+
+          // Check if 17 is within the inclusive range.
+          if (!isNaN(start) && !isNaN(end) && CONFIG.GROUP_NUM >= start && CONFIG.GROUP_NUM <= end) {
+            return true; // Found in a range, return true immediately.
+          }
+        } else {
+          // 7. If it's not a range, handle single groups.
+          // The rule is to match only "17" (without letters) or "17A".
+          if (trimmedGroup === (''+CONFIG.GROUP_NUM) || trimmedGroup === ('' + CONFIG.GROUP_NUM + CONFIG.SUBGROUP) || trimmedGroup === (CONFIG.GROUP_NUM + 'ab')) {
+            return true; // Found a matching group, return true immediately.
+          }
+        }
+      }
+    }
+  }
+
+  // 8. If all loops complete without finding any match in any of the group lists, return false.
+  return false;
+}
+
+function containsLifeGroupOld(title) {
   // 1. Use a regular expression to find the string 'Groups' followed by any characters until a colon.
   // The expression captures the list of groups between 'Groups ' and ':'.
   // The 'i' flag makes the search for 'Groups' case-insensitive.
@@ -368,3 +408,7 @@ function pertainsClass(title) {
   // Rule 3: If neither M1 nor M2 was found, return true.
   return true;
 }
+
+
+
+
