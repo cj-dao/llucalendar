@@ -299,7 +299,7 @@ function containsLifeGroup(title) {
   // The 'i' flag makes the search case-insensitive.
   const matches = title.matchAll(/Groups\s+([^:;\[\](){}]+)/gi);
 
-  if(title.toLowerCase().indexOf('Group '+CONFIG.GROUP_NUM) != -1) {
+  if(title.toLowerCase().indexOf('group '+CONFIG.GROUP_NUM) != -1) {
     return true;
   }
 
