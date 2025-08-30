@@ -3,10 +3,10 @@
  */
 const CONFIG = {
   // ID of the calendar to copy events FROM.
-  SOURCE_CALENDAR_ID: '1cmf40v4v4ctchb0u99a3382r2v17k7v@import.calendar.google.com',
+  SOURCE_CALENDAR_ID: 'INSERT LLU CALENDAR ID HERE',
 
   // ID of the calendar to copy events TO. Find this in the calendar's settings.
-  DESTINATION_CALENDAR_ID: 'calebjonathandao@gmail.com',
+  DESTINATION_CALENDAR_ID: 'INSERT YOUR OWN CALENDAR ID HERE',
 
   //Life group #
   GROUP_NUM: 00,
