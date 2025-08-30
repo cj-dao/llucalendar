@@ -2,6 +2,10 @@
  * Configuration Block
  */
 const CONFIG = {
+
+  //------  Change these values! -------
+  // vvvvvvvvvvvvvvvvvvvvvvvvvvv
+  
   // ID of the calendar to copy events FROM.
   SOURCE_CALENDAR_ID: 'INSERT LLU CALENDAR ID HERE',
 
@@ -13,6 +17,12 @@ const CONFIG = {
 
   //Life subgroup (A or B)
   SUBGROUP: 'A'.toLowerCase(),
+
+  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  
+
+  //No need to change these values: --------------
   
   // Keywords denoting Group events
   KEYWORDS: ['Group'],
