@@ -12,7 +12,7 @@ The script may errantly miss events or otherwise fail to properly reflect your s
 5) In the Config file, fill in the values for your calendar IDs and Life Community group + subgroup.
 6) Deploy the project as a web app.
 7) In the left menu panel, create a new time-driven trigger, executing the syncCalendars function under Head deployment every 1 day during a time period of your choosing.
-8) Run the script from the code panel to test, ensuring that the syncCalendars function is selected to execute, and allowing any necessary authorizations.
+8) Run the script from the Code.gs file, ensuring that the syncCalendars function is selected to execute, and allow any necessary authorizations.
 9) Ask AI for help if you run into any problems.
 
 # Optional instructions
