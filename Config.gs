@@ -9,7 +9,7 @@ const CONFIG = {
   DESTINATION_CALENDAR_ID: 'INSERT PERSONAL CALENDAR ID',
 
   //Life group #
-  GROUP_NUM: 17,
+  GROUP_NUM: 00,
 
   //Life subgroup (A or B)
   SUBGROUP: 'A'.toLowerCase(),
